@@ -17,8 +17,8 @@ def mediana_evolve(lista_datos: list) -> float:
 def percentil_evolve(lista_datos: list, percentil: int) -> float:
     sorted_lista = sorted(lista_datos)
     n = len(lista_datos)
-    k = round((percentil / 100) * n, 0)
-    return sorted_lista[int(k) - 1]
+    k = max(1, round((percentil / 100) * n))
+    return sorted_lista[int(k) - 1] 
 
 def varianza_evolve(lista_datos: list) -> float:
     media = media_evolve(lista_datos)
