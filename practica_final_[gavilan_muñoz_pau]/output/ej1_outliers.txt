@@ -1,0 +1,36 @@
+EJERCICIO 1 — DETECCIÓN DE OUTLIERS (Método IQR)
+==================================================
+
+Variable objetivo: Global_Sales
+Método: IQR (robusto ante distribuciones asimétricas)
+
+Q1:               0.060
+Q3:               0.470
+IQR:              0.410
+Límite inferior:  -0.555
+Límite superior:  1.085
+
+Total outliers:   1892 (11.32%)
+
+Top 20 outliers por Global_Sales:
+                                        Name Platform  Global_Sales
+                                  Wii Sports      Wii         82.53
+                           Super Mario Bros.      NES         40.24
+                              Mario Kart Wii      Wii         35.52
+                           Wii Sports Resort      Wii         32.77
+                    Pokemon Red/Pokemon Blue       GB         31.37
+                                      Tetris       GB         30.26
+                       New Super Mario Bros.       DS         29.80
+                                    Wii Play      Wii         28.92
+                   New Super Mario Bros. Wii      Wii         28.32
+                                   Duck Hunt      NES         28.31
+                                  Nintendogs       DS         24.67
+                               Mario Kart DS       DS         23.21
+                 Pokemon Gold/Pokemon Silver       GB         23.10
+                                     Wii Fit      Wii         22.70
+                          Kinect Adventures!     X360         21.81
+                                Wii Fit Plus      Wii         21.79
+                          Grand Theft Auto V      PS3         21.04
+               Grand Theft Auto: San Andreas      PS2         20.81
+                           Super Mario World     SNES         20.61
+Brain Age: Train Your Brain in Minutes a Day       DS         20.15

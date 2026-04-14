@@ -1,0 +1,17 @@
+EJERCICIO 4 — ANÁLISIS DEL RESIDUO
+=============================================
+
+Media:     0.1271
+Std:       3.2220
+Asimetría: -0.0509
+Curtosis:  -0.0610
+
+Test ADF:
+  Estadístico: -39.9160
+  p-valor: 0.000000
+  → Residuo ESTACIONARIO
+
+Test Jarque-Bera (normalidad):
+  Estadístico: 1.1013
+  p-valor: 0.576561
+  → No se rechaza normalidad

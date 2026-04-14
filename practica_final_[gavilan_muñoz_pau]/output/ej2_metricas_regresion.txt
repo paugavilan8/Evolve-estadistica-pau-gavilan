@@ -1,0 +1,10 @@
+EJERCICIO 2 — MÉTRICAS REGRESIÓN LINEAL
+=============================================
+
+MAE  (Error Absoluto Medio):       0.0038
+RMSE (Raíz Error Cuadrático Medio):0.0059
+R²   (Coef. de Determinación):     1.0000
+
+Interpretación:
+  - El modelo explica el 100.00% de la varianza de Global_Sales.
+  - En promedio, el error de predicción es de 0.0038 millones de unidades.
