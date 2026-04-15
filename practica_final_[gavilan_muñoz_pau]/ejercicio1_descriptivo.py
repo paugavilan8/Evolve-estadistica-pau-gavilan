@@ -26,7 +26,15 @@ TARGET = 'Global_Sales'
 # ─────────────────────────────────────────────
 
 def cargar_datos(ruta: str) -> pd.DataFrame:
+    """
+    Carga el dataset desde un fichero CSV.
 
+    Parámetros:
+        ruta (str): Ruta al fichero CSV.
+
+    Retorna:
+        pd.DataFrame: DataFrame con los datos cargados.
+    """
     df = pd.read_csv(ruta)
     return df
 
@@ -36,7 +44,16 @@ def cargar_datos(ruta: str) -> pd.DataFrame:
 # ─────────────────────────────────────────────
 
 def resumen_estructural(df: pd.DataFrame) -> None:
+    """
+    Imprime el resumen estructural del dataset: dimensiones, tamaño en
+    memoria, tipos de dato y porcentaje de valores nulos por columna.
 
+    Parámetros:
+        df (pd.DataFrame): Dataset cargado.
+
+    Retorna:
+        None
+    """
     print("=" * 60)
     print("A) RESUMEN ESTRUCTURAL")
     print("=" * 60)
@@ -65,7 +82,18 @@ Decisión de tratamiento de nulos:
 # ─────────────────────────────────────────────
 
 def estadisticos_numericos(df: pd.DataFrame) -> pd.DataFrame:
+    """
+    Calcula y muestra estadísticos descriptivos de todas las variables
+    numéricas: media, mediana, moda, desviación típica, varianza, mínimo,
+    máximo, cuartiles, IQR, skewness y curtosis.
+    Guarda el resumen en output/ej1_descriptivo.csv.
 
+    Parámetros:
+        df (pd.DataFrame): Dataset cargado.
+
+    Retorna:
+        pd.DataFrame: Tabla de estadísticos descriptivos.
+    """
     print("\n" + "=" * 60)
     print("B) ESTADÍSTICOS DESCRIPTIVOS NUMÉRICOS")
     print("=" * 60)
@@ -94,7 +122,16 @@ def estadisticos_numericos(df: pd.DataFrame) -> pd.DataFrame:
 # ─────────────────────────────────────────────
 
 def plot_histogramas(df: pd.DataFrame) -> None:
+    """
+    Genera y guarda histogramas de todas las variables numéricas.
+    Salida: output/ej1_histogramas.png
 
+    Parámetros:
+        df (pd.DataFrame): Dataset cargado.
+
+    Retorna:
+        None
+    """
     cols_num = df.select_dtypes(include=[np.number]).columns.tolist()
     n = len(cols_num)
     ncols = 3
@@ -121,7 +158,17 @@ def plot_histogramas(df: pd.DataFrame) -> None:
 
 
 def plot_boxplots(df: pd.DataFrame) -> None:
+    """
+    Genera y guarda boxplots de la variable objetivo segmentados por cada
+    variable categórica con <= 30 categorías únicas.
+    Salida: output/ej1_boxplots.png
 
+    Parámetros:
+        df (pd.DataFrame): Dataset cargado.
+
+    Retorna:
+        None
+    """
     cols_cat = df.select_dtypes(include=['object', 'str']).columns.tolist()
     cols_cat_validas = [c for c in cols_cat if df[c].nunique() <= 30]
 
@@ -152,7 +199,20 @@ def plot_boxplots(df: pd.DataFrame) -> None:
 
 
 def detectar_outliers_iqr(df: pd.DataFrame) -> None:
+    """
+    Detecta outliers en la variable objetivo usando el método IQR
+    (límites: Q1 - 1.5·IQR y Q3 + 1.5·IQR) y guarda el informe en
+    output/ej1_outliers.txt.
 
+    Justificación del método: la distribución de Global_Sales es muy
+    asimétrica (skewness ≈ 17), por lo que IQR es más robusto que Z-score.
+
+    Parámetros:
+        df (pd.DataFrame): Dataset cargado.
+
+    Retorna:
+        None
+    """
     print("\n" + "=" * 60)
     print("C) DETECCIÓN DE OUTLIERS — Método IQR")
     print("   (Justificación: distribución muy asimétrica → IQR más robusto)")
@@ -193,7 +253,17 @@ def detectar_outliers_iqr(df: pd.DataFrame) -> None:
 # ─────────────────────────────────────────────
 
 def analisis_categoricas(df: pd.DataFrame) -> None:
+    """
+    Calcula frecuencias absolutas y relativas de cada variable categórica,
+    detecta desbalance (categoría dominante > 50%) y genera gráficos de barras.
+    Salida: output/ej1_categoricas.png
 
+    Parámetros:
+        df (pd.DataFrame): Dataset cargado.
+
+    Retorna:
+        None
+    """
     print("\n" + "=" * 60)
     print("D) VARIABLES CATEGÓRICAS")
     print("=" * 60)
@@ -240,7 +310,18 @@ def analisis_categoricas(df: pd.DataFrame) -> None:
 # ─────────────────────────────────────────────
 
 def analisis_correlaciones(df: pd.DataFrame) -> None:
+    """
+    Calcula y visualiza la matriz de correlaciones de Pearson de las variables
+    numéricas. Identifica las 3 variables con mayor correlación con el target
+    y detecta posible multicolinealidad (|r| > 0.9).
+    Salida: output/ej1_heatmap_correlacion.png
 
+    Parámetros:
+        df (pd.DataFrame): Dataset cargado.
+
+    Retorna:
+        None
+    """
     print("\n" + "=" * 60)
     print("E) CORRELACIONES")
     print("=" * 60)

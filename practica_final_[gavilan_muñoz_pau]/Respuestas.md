@@ -59,17 +59,37 @@ Se eliminaron columnas con alta cardinalidad o muchos nulos (`Name`, `Developer`
 
 ---
 
-**Pregunta 2.1** — Indica los valores de MAE, RMSE y R² de la regresión lineal sobre el test set. ¿El modelo funciona bien? ¿Por qué?
+**Pregunta 2.1** — Indica los valores de MAE, RMSE y R² de la regresión lineal 
+sobre el test set. ¿El modelo funciona bien? ¿Por qué?
 
-> - **MAE = 0.0038** millones de unidades de error promedio
-> - **RMSE = 0.0059**
-> - **R² = 1.0000** — el modelo explica el 100% de la varianza
+> - **MAE = 0.6979** millones de unidades de error promedio
+> - **RMSE = 2.4603**
+> - **R² = 0.0240** — el modelo explica solo el 2.40% de la varianza
 >
-> El modelo no funciona especialmente bien. `Global_Sales` tiene una distribución muy
-> asimétrica con outliers extremos que penalizan el RMSE. Además, el éxito comercial
-> de un juego depende de factores no presentes en el dataset (marketing, franquicia,
-> momento de lanzamiento). La regresión lineal no captura bien estas relaciones
-> no lineales.
+> El modelo no funciona bien. El R² de 0.024 indica que las variables
+> disponibles (plataforma, género, año, rating) apenas tienen capacidad
+> predictiva sobre las ventas globales. Esto tiene sentido: el éxito
+> comercial de un videojuego depende principalmente de factores no presentes
+> en el dataset como el marketing, la franquicia, o el momento de lanzamiento.
+> Además, la distribución de Global_Sales es muy asimétrica con outliers
+> extremos (Wii Sports: 82M), lo que penaliza el RMSE y dificulta el ajuste
+> lineal. El gráfico de residuos confirma heteroscedasticidad clara — los
+> residuos aumentan con el valor predicho, violando los supuestos de la
+> regresión lineal.
+
+**Comparativa y mejoras concretas:**
+
+> El bajo R²=0.024 confirma que el modelo lineal sobre estos datos tiene poca
+> capacidad predictiva. Las mejoras más directas serían:
+> - **Transformación logarítmica del target**: aplicar log(Global_Sales + 1)
+>   reduciría la asimetría extrema (skewness ≈ 17) y el impacto de outliers
+>   como Wii Sports (82M), haciendo los datos más compatibles con regresión lineal.
+> - **Eliminación de outliers en entrenamiento**: filtrar juegos con
+>   Global_Sales > límite IQR (1.085M) para que el modelo no se distorsione
+>   por los extremos, aunque se perdería información de los grandes éxitos.
+> - **Modelos no lineales**: Random Forest o Gradient Boosting capturarían
+>   mejor las interacciones no lineales entre plataforma, género y año,
+>   probablemente con R² significativamente mayor.
 
 ---
 
@@ -112,13 +132,6 @@ y = 5 + 2·x₁ - 1·x₂ + 0.5·x₃ + ruido(σ=1.5).
 > no predictible.
 
 **Pregunta 3.4** — Compara los resultados con la regresión del Ejercicio 2 y explica qué ha sucedido.
-
-> Los resultados del Ejercicio 3 son notablemente mejores que los del Ejercicio 2.
-> En el Ejercicio 3 los datos son sintéticos y cumplen exactamente los supuestos de
-> la regresión lineal (linealidad, ruido gaussiano), por eso el modelo recupera bien
-> los coeficientes. En el Ejercicio 2 los datos reales de videojuegos tienen
-> distribución asimétrica, outliers y relaciones no lineales, lo que limita mucho
-> el rendimiento de un modelo lineal.
 
 ---
 
